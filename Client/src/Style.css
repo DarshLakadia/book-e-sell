@@ -1,0 +1,25 @@
+
+
+.header{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    /* flex-wrap: wrap; */
+    width: 100% !important;
+    /* background-color: orange; */
+    height: 10vh !important;
+}
+.header .left{
+    /* background-color: aqua; */
+    width: 25vw !important;
+}
+.header *{
+    margin: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.right a{
+    text-decoration: none !important;
+}
+
