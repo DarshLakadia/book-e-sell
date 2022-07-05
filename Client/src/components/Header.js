@@ -7,6 +7,8 @@ import {
   Link,
   Outlet,
 } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { FaSearch } from "react-icons/fa";
 import Login from "./Login";
@@ -38,6 +40,9 @@ const Header = ({ user, setUser }) => {
               localStorage.removeItem("user");
               localStorage.removeItem("jwt");
               setUser("");
+              toast.info("User Logout Successfully", {
+                position: "top-center",
+              });
             }}
           >
             LogOut
@@ -46,6 +51,7 @@ const Header = ({ user, setUser }) => {
       ) : (
         <div className="right">
           <Link to="/register">Register</Link> | <Link to="/login">Login</Link>
+          <ToastContainer />
         </div>
       )}
     </div>

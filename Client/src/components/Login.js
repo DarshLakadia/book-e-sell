@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import M from "materialize-css";
-import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = ({ user, setUser }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -29,21 +30,35 @@ const Login = ({ user, setUser }) => {
       .then((data) => {
         // console.log(data);
         if (data.error) {
-          M.toast({ html: data.error, classes: "#c62828 red darken-3" });
         } else {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
           console.log(data.user);
-          M.toast({
-            html: "signedin success",
-            classes: "#43a047 green darken-1",
-          });
+          // M.toast({
+          //   html: "signedin success",
+          //   classes: "#43a047 green darken-1",
+          // });
+          {
+            localStorage.getItem("user") &&
+              toast.success("User Login Successfully", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+          }
           // history.push("/");
           setUser(data.user);
         }
       })
       .catch((err) => {
         console.log(err);
+        toast.error("No user found with this data", {
+          position: "top-center",
+        });
       });
   };
 
@@ -79,6 +94,7 @@ const Login = ({ user, setUser }) => {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Product = ({ user, setUser }) => {
   const [data, setData] = useState([]);
 
   const submitData = () => {
-    toast.success("🦄 Wow so easy!", {
+    toast.success("Item added to cart successfully", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
