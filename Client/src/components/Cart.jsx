@@ -1,95 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../cart.css";
+import { Link } from "react-router-dom";
 
-const Cart = () => {
-  const [count, setCount] = useState(1);
-  const [prices, setPrices] = useState(500);
+const Cart = ({
+  cart,
+  incrementCount,
+  decrementCount,
+  removeBook,
+  setOriginalData,
+}) => {
+  const [data, setData] = useState([]);
+  const [prices, setPrices] = useState(0);
+
+  useEffect(() => {
+    setData(cart);
+    console.log(data);
+  }, [cart]);
+
+  useEffect(() => {
+    setData(cart);
+    console.log(data);
+  }, []);
+
+  // console.log(data);
+
+  useEffect(() => {
+    let prices = 0;
+    data.map((item) => [(prices += item.price * item.count)]);
+    setPrices(prices);
+  }, [data]);
+
   return (
     <div className="product">
       <div className="product-container">
-        <div className="title">Cart Page</div>
+        <div className="title">Your Cart Show Here!!</div>
         <div className="product-details">
-          <div className="name">My Shopping Bag ({count} Items)</div>
+          {/* <div className="name">My Shopping Bag ({count} Items)</div> */}
           <div className="sort">
-            <div className="Sort-by">Total price: {prices}</div>
+            <div className="Sort-by">Total price: {prices} Rs.</div>
           </div>
+          <button onClick={() => setOriginalData()}>Clear Cart</button>
         </div>
 
         <div className="main-container">
-          <div className="cart-container">
-            <div className="image">
-              <img
-                src="https://tse1.mm.bing.net/th?id=OIP.WV2lbCX7GEVDWdm_kcVDLAHaEK&pid=Api&P=0&w=200&h=200"
-                alt="Image"
-                srcset=""
-              />
-            </div>
-            <div className="element">
-              <p>Campus Sutra</p>
-              <p>Cart item name</p>
-              <div className="btn">
-                <span
-                  onClick={() => {
-                    setCount(count + 1);
-                    prices == 0 ? setPrices(0) : setPrices(prices + 500);
-                  }}
-                >
-                  +
-                </span>
-                <span className="num">{count}</span>
-                <span
-                  onClick={() => {
-                    count == 0 ? setCount(0) : setCount(count - 1);
-                    prices == 0 ? setPrices(0) : setPrices(prices - 500);
-                  }}
-                >
-                  -
-                </span>
+          {data.map((item) => {
+            return (
+              <div className="cart-container">
+                <div className="image">
+                  <img src={item.bookImage} alt="Image" srcset="" />
+                </div>
+                <div className="element">
+                  <p>{item.title}</p>
+                  <p>{item.category}</p>
+                  <div className="btn">
+                    <span
+                      onClick={() => {
+                        incrementCount(item._id);
+                      }}
+                    >
+                      +
+                    </span>
+                    <span className="num">{item.count}</span>
+                    <span
+                      onClick={() => {
+                        decrementCount(item._id);
+                      }}
+                    >
+                      -
+                    </span>
+                  </div>
+                </div>
+                <div className="price">
+                  <p className="rate">{item.price}</p>
+                  <p className="discount">50% OFF</p>
+                  <p className="remove" onClick={() => removeBook(item._id)}>
+                    Remove
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="price">
-              <p className="rate">500</p>
-              <p className="discount">50% OFF</p>
-              <p className="remove">Remove</p>
-            </div>
-          </div>
-          <div className="cart-container">
-            <div className="image">
-              <img
-                src="https://tse1.mm.bing.net/th?id=OIP.WV2lbCX7GEVDWdm_kcVDLAHaEK&pid=Api&P=0&w=200&h=200"
-                alt="Image"
-                srcset=""
-              />
-            </div>
-            <div className="element">
-              <p>Campus Sutra</p>
-              <p>Cart item name</p>
-              <div className="btn">
-                <span
-                  onClick={() => {
-                    setCount(count + 1);
-                    prices == 0 ? setPrices(0) : setPrices(prices + 500);
-                  }}
-                >
-                  +
-                </span>
-                <span className="num">{count}</span>
-                <span
-                  onClick={() => {
-                    count == 0 ? setCount(0) : setCount(count - 1);
-                    prices == 0 ? setPrices(0) : setPrices(prices - 500);
-                  }}
-                >
-                  -
-                </span>
-              </div>
-            </div>
-            <div className="price">
-              <p className="rate">500</p>
-              <p className="discount">50% OFF</p>
-              <p className="remove">Remove</p>
-            </div>
-          </div>
+            );
+          })}
         </div>
         <div className="submit-btn">
           <button type="submit">Place order</button>

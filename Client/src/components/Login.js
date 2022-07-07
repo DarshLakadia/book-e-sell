@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import M from "materialize-css";
+import { useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +8,7 @@ const Login = ({ user, setUser }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const navigate = useNavigate();
   const postData = () => {
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -34,6 +36,7 @@ const Login = ({ user, setUser }) => {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
           console.log(data.user);
+          navigate("/", { replace: true });
           // M.toast({
           //   html: "signedin success",
           //   classes: "#43a047 green darken-1",
@@ -55,7 +58,7 @@ const Login = ({ user, setUser }) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error("No user found with this data", {
           position: "top-center",
         });
