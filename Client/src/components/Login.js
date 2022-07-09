@@ -90,7 +90,6 @@ const Login = ({ user, setUser }) => {
         <h4>
           <Link to="/register">Dont have an account ?</Link>
         </h4>
-        <ToastContainer />
         {/* </form> */}
       </div>
     </div>
