@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../style.css";
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  Outlet,
-  useNavigate,
-} from "react-router-dom";
-// import M from "materialize-css";
-import { ToastContainer, toast } from "react-toastify";
+import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -19,10 +11,6 @@ const Header = ({ data, addToCart, user, setUser }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [details, setDetails] = useState([]);
-
-  // useEffect(() => {
-  //   M.Modal.init(searchModel.current);
-  // }, []);
 
   const fetchUsers = (query) => {
     setSearch(query.charAt(0).toUpperCase() + query.slice(1).toLowerCase());
@@ -92,18 +80,6 @@ const Header = ({ data, addToCart, user, setUser }) => {
 
       {user ? (
         <div className="right">
-          {/* <button
-            onClick={() => {
-              localStorage.removeItem("user");
-              localStorage.removeItem("jwt");
-              setUser("");
-              toast.info("User Logout Successfully", {
-                position: "top-center",
-              });
-            }}
-          >
-            LogOut
-          </button> */}
           <span
             onClick={() => {
               localStorage.removeItem("user");
@@ -142,7 +118,6 @@ const Header = ({ data, addToCart, user, setUser }) => {
           <Link to="/register">Register</Link> | <Link to="/login">Login</Link>
         </div>
       )}
-      <ToastContainer />
     </div>
   );
 };

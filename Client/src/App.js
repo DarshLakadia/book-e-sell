@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Product from "./components/Product";
 import Register from "./components/Register";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 function App() {
@@ -67,12 +67,6 @@ function App() {
     }
     toast.success("Item added to cart successfully", {
       position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
     });
   };
 
@@ -187,6 +181,7 @@ function App() {
       </Router>
       {/* <Login />
       <Register /> */}
+      <ToastContainer />
     </div>
   );
 }

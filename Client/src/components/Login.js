@@ -2,22 +2,51 @@ import React, { useState } from "react";
 import M from "materialize-css";
 import { Link, useNavigate } from "react-router-dom";
 import "../style.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import axios from "axios";
 const Login = ({ user, setUser }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
-  const postData = () => {
-    if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        email
-      )
-    ) {
-      M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
-      return;
-    }
+  const postresponse = () => {
+    // if (
+    //   !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    //     email
+    //   )
+    // ) {
+    //   toast.error("Invalid Email", {
+    //     position: "top-center",
+    //     autoClose: 5000,
+    //   });
+    // }
+    // // axios
+    // //   .get("/user/login")
+    // //   .then((response) => {
+    // //     console.log(response);
+    // //     if (response.error) {
+    // //       console.log(response.error);
+    // //       toast.error(response.error, {
+    // //         position: "top-center",
+    // //         autoClose: 5000,
+    // //       });
+    // //     } else {
+    // //       localStorage.setItem("jwt", response.token);
+    // //       localStorage.setItem("user", JSON.stringify(response.user));
+    // //       console.log(response.user);
+    // //       localStorage.getItem("user") &&
+    // //         toast.success("User Login Successfully", {
+    // //           position: "top-center",
+    // //           autoClose: 5000,
+    // //         });
+    // //       // history.push("/");
+    // //       setUser(response.user);
+    // //       // navigate("/");
+    // //     }
+    // //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     fetch("/user/login", {
       method: "post",
       headers: {
@@ -29,31 +58,30 @@ const Login = ({ user, setUser }) => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        if (data.error) {
+      .then((response) => {
+        // console.log(response);
+        if (response.error) {
+          console.log(response.error);
+          toast.error(response.error, {
+            position: "top-center",
+            autoClose: 5000,
+          });
         } else {
-          localStorage.setItem("jwt", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          console.log(data.user);
-          {
-            localStorage.getItem("user") &&
-              toast.success("User Login Successfully", {
-                position: "top-center",
-                autoClose: 5000,
-              });
-            navigate("/");
-
-            // history.push("/");
-          }
-          setUser(data.user);
+          localStorage.setItem("jwt", response.token);
+          localStorage.setItem("user", JSON.stringify(response.user));
+          console.log(response.user);
+          localStorage.getItem("user") &&
+            toast.success("User Login Successfully", {
+              position: "top-center",
+              autoClose: 5000,
+            });
+          // history.push("/");
+          setUser(response.user);
+          navigate("/");
         }
       })
       .catch((err) => {
-        // console.log(err);
-        toast.error("No user found with this data", {
-          position: "top-center",
-        });
+        console.log(err);
       });
   };
 
@@ -84,7 +112,7 @@ const Login = ({ user, setUser }) => {
             />
           </div>
         </div>
-        <button className="login-btn" onClick={() => postData()}>
+        <button className="login-btn" onClick={() => postresponse()}>
           Login Here!!
         </button>
         <h4>
