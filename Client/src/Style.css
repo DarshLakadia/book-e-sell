@@ -1,5 +1,37 @@
 
+.middle{
+    position: relative;
+    
+    flex: 1;
+}
+.middle input{
+    height: 30px;
+    width: 240px;
+}
+.showItem{
+    border-radius: 5px;
+    width: 250px;
+    position: absolute;
+    background-color: antiquewhite;
+    height: auto;
+    max-height: 400px;
+    overflow-y: scroll;
+    z-index: 1;
+    /* padding: 10px; */
 
+}
+.searchItem{
+    display: flex;
+    justify-content: space-between;
+    /* flex-direction: column; */
+}
+.showItem::-webkit-scrollbar{
+    display: none;
+}
+.cart-btn{
+  
+     width: 20%;
+}
 .header{
     display: flex ;
     align-items: center ;
@@ -15,12 +47,24 @@
 }
 .header *{
     margin: 8px ;
-    display: flex ;
+    /* display: flex ; */
     align-items: center ;
 }
-
+.right{
+    display: flex;
+}
+.right button{
+    height: 35px;
+    margin-block: 15px;
+    display: flex;
+    margin-inline: 20px;
+}
 .right a{
+    display: flex;
     text-decoration: none ;
+}
+.right span{
+cursor: pointer;
 }
 
 /* .collection{
@@ -33,5 +77,60 @@
     color: black;
     display: block;
   }  */
+  button{
 
-  
+    position: inherit;
+    height: 30px;
+    margin-block: 5px !important;
+    background-color: #f14d54;
+    width: 100%;
+    padding: 30px auto !important;
+    margin: 2px auto;
+    border-radius: 5px;
+    border: none;
+    color: white !important;
+    cursor: pointer;
+}  
+ 
+
+.login-btn {
+
+    cursor: pointer !important;
+    margin: 10px auto;
+    padding: 5px;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 5px;
+    background: linear-gradient(135deg,#71b7e6,#9b59b6)!important;
+    
+}
+
+.login-btn:hover{
+    background: linear-gradient(135deg,#71b7e6,#9b59b6);
+}
+
+@media(max-width: 584px){
+    .register{
+        max-width: 100%;
+    }
+     .user-details .input-box{
+        margin-bottom: 15px;
+        width: 90%;
+    }
+     .user-details{
+        max-height: 300px;
+        overflow-y: scroll;
+        
+    }
+    .user-details::-webkit-scrollbar{
+        width: 0;
+    }
+}
+h4{
+    margin: 0;
+}

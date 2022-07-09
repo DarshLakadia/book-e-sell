@@ -1,44 +1,49 @@
 import React, { useEffect, useState } from "react";
-import "../Style.css";
+import "../style.css";
+
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Link,
   Outlet,
+  useNavigate,
 } from "react-router-dom";
 // import M from "materialize-css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
-import { FaSearch } from "react-icons/fa";
-import { useRef } from "react";
 const Header = ({ data, addToCart, user, setUser }) => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [details, setDetails] = useState([]);
-  const searchModel = useRef(null);
 
   // useEffect(() => {
   //   M.Modal.init(searchModel.current);
   // }, []);
 
   const fetchUsers = (query) => {
-    setSearch(query);
-    // console.log(query);
-    fetch("/product/find-books", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query,
-      }),
-    })
-      .then((res) => res.json())
-      .then((results) => {
-        console.log(results.book);
-        setDetails(results.book);
-      });
+    setSearch(query.charAt(0).toUpperCase() + query.slice(1).toLowerCase());
+    console.log(query);
+
+    {
+      fetch("/product/find-books", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query,
+        }),
+      })
+        .then((res) => res.json())
+        .then((results) => {
+          console.log(results.book);
+          setDetails(results.book);
+        });
+    }
   };
   return (
     // {toggleNav}
@@ -53,58 +58,8 @@ const Header = ({ data, addToCart, user, setUser }) => {
             TatvaSoft
           </Link>
         </h3>
-        {/* <i
-          data-target="modal1"
-          className="large material-icons modal-trigger"
-          style={{ color: "black", cursor: "pointer" }}
-        >
-          search
-        </i>
-        <div
-          id="modal1"
-          className="modal"
-          ref={searchModel}
-          style={{ color: "black" }}
-        >
-          <div className="modal-content">
-            <input
-              type="text"
-              placeholder="search users"
-              value={search}
-              onChange={(e) => fetchUsers(e.target.value)}
-            />
-            <ul className="collection">
-              {details.map((item) => {
-                return (
-                  <div
-                    // to={"/book/" + item._id}
-                    onClick={() => {
-                      M.Modal.getInstance(searchModel.current).close();
-                      setSearch("");
-                    }}
-                  >
-                    <div className="collection-item">
-                      <p>{item.title}</p>
-                      {localStorage.getItem("user") && (
-                        <button onClick={() => addToCart(item._id)}>
-                          ADD TO CART
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="modal-footer">
-            <button
-              className="modal-close waves-effect waves-green btn-flat"
-              onClick={() => setSearch("")}
-            >
-              close
-            </button>
-          </div>
-        </div> */}
+      </div>
+      <div className="middle">
         <input
           type="text"
           placeholder="Search....."
@@ -112,36 +67,32 @@ const Header = ({ data, addToCart, user, setUser }) => {
           onChange={(e) => fetchUsers(e.target.value)}
         />
         {/* <FaSearch /> */}
-        <br />
-        <br />
-
-        <div className="showItem">
-          {details.map((item) => {
-            return (
-              <div
-                // to={"/book/" + item._id}
-                onClick={() => {
-                  // M.Modal.getInstance(searchModel.current).close();
-                  setSearch("");
-                }}
-              >
-                <div className="collection-item">
+        {search && (
+          <div className="showItem">
+            {details.map((item) => {
+              return (
+                <div className="searchItem">
                   <p>{item.title}</p>
                   {localStorage.getItem("user") && (
-                    <button onClick={() => addToCart(item._id)}>
-                      ADD TO CART
-                    </button>
+                    <>
+                      <button
+                        className="cart-btn"
+                        onClick={() => addToCart(item._id)}
+                      >
+                        +
+                      </button>
+                    </>
                   )}
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {user ? (
         <div className="right">
-          <button
+          {/* <button
             onClick={() => {
               localStorage.removeItem("user");
               localStorage.removeItem("jwt");
@@ -152,14 +103,46 @@ const Header = ({ data, addToCart, user, setUser }) => {
             }}
           >
             LogOut
+          </button> */}
+          <span
+            onClick={() => {
+              localStorage.removeItem("user");
+              localStorage.removeItem("jwt");
+              setUser("");
+              toast.info("User Logout Successfully", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              navigate("/login", { replace: true });
+            }}
+          >
+            Logout
+          </span>
+          {/* <div className="cart"> */}
+          <button
+            style={{ right: "0", paddingBlock: "20px", marginInline: "20px" }}
+          >
+            <Link to="/cart">
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                style={{ marginInline: "5px", fontSize: "20px" }}
+              />
+              <span style={{ fontWeight: "100", fontSize: "20px" }}>Cart</span>
+            </Link>
           </button>
+          {/* </div> */}
         </div>
       ) : (
         <div className="right">
           <Link to="/register">Register</Link> | <Link to="/login">Login</Link>
-          <ToastContainer />
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

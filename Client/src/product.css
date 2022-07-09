@@ -111,3 +111,33 @@
     width: 150px;
     height: 117.2px;
 }
+
+.product .product-container .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.product-container a{
+    text-decoration: none;
+   margin-inline: 2px;
+}
+
+.cart{
+
+    flex-direction: row-reverse;
+   
+}
+.product .title-name::after{
+    content: '';
+    position: absolute;
+    left: 42%;
+    top: 160px;
+    /* bottom: 2px; */
+    height: 3px;
+    width: 60px;
+    background: linear-gradient(135deg,#71b7e6,#9b59b6);
+}
+.sort Button:hover{
+    background-color: yellowgreen;
+}

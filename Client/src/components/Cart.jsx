@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../cart.css";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = ({
   cart,
@@ -39,7 +41,9 @@ const Cart = ({
           <div className="sort">
             <div className="Sort-by">Total price: {prices} Rs.</div>
           </div>
-          <button onClick={() => setOriginalData()}>Clear Cart</button>
+          {data.length > 0 && (
+            <button onClick={() => setOriginalData()}>Clear Cart</button>
+          )}
         </div>
 
         <div className="main-container">
@@ -71,7 +75,7 @@ const Cart = ({
                   </div>
                 </div>
                 <div className="price">
-                  <p className="rate">{item.price}</p>
+                  <p className="rate">{item.price} Rs.</p>
                   <p className="discount">50% OFF</p>
                   <p className="remove" onClick={() => removeBook(item._id)}>
                     Remove
@@ -82,8 +86,17 @@ const Cart = ({
           })}
         </div>
         <div className="submit-btn">
-          <button type="submit">Place order</button>
+          <button
+            onClick={() => {
+              toast.success("Order Placed Successfully", {
+                position: "top-center",
+              });
+            }}
+          >
+            Place order
+          </button>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

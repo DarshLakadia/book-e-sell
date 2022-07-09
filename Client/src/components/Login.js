@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import M from "materialize-css";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import "../style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = ({ user, setUser }) => {
@@ -42,8 +42,10 @@ const Login = ({ user, setUser }) => {
                 position: "top-center",
                 autoClose: 5000,
               });
+            navigate("/");
+
+            // history.push("/");
           }
-          // history.push("/");
           setUser(data.user);
         }
       })
@@ -59,35 +61,38 @@ const Login = ({ user, setUser }) => {
     <div className="register">
       <div className="register-container">
         <div className="title">Login</div>
-        <form action="#">
-          <div className="user-details">
-            <div className="input-box">
-              <span className="details">Email</span>
-              <input
-                type="text"
-                placeholder="Enter Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="input-box">
-              <span className="details">Password</span>
-              <input
-                type="password"
-                placeholder="Enter Password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+        {/* <form > */}
+        <div className="user-details">
+          <div className="input-box">
+            <span className="details">Email</span>
+            <input
+              type="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
-          <button type="submit" onClick={() => postData()}>
-            Login Here!!
-          </button>
-        </form>
+          <div className="input-box">
+            <span className="details">Password</span>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <button className="login-btn" onClick={() => postData()}>
+          Login Here!!
+        </button>
+        <h4>
+          <Link to="/register">Dont have an account ?</Link>
+        </h4>
+        <ToastContainer />
+        {/* </form> */}
       </div>
-      <ToastContainer />
     </div>
   );
 };
