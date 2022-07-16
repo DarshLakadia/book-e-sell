@@ -22,10 +22,10 @@ function App() {
       const currUser = JSON.parse(localStorage.getItem("user"));
       setUser(currUser);
     }
-    // if (localStorage.getItem("seller")) {
-    //   const currseller = JSON.parse(localStorage.getItem("seller"));
-    //   setUser(currseller);
-    // }
+    if (localStorage.getItem("seller")) {
+      const currseller = JSON.parse(localStorage.getItem("seller"));
+      setUser(currseller);
+    }
   }, []);
 
   useEffect(() => {
