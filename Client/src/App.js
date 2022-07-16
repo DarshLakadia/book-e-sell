@@ -8,10 +8,14 @@ import Register from "./components/Register";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Order from "./components/Order";
+import SellerLogin from "./components/SellerLogin";
+import SellerRegister from "./components/SellerRegister";
 function App() {
   const [user, setUser] = useState("");
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
+  const [seller, setSeller] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
@@ -67,6 +71,7 @@ function App() {
     }
     toast.success("Item added to cart successfully", {
       position: "top-center",
+      hideProgressBar: true,
     });
   };
 
@@ -151,6 +156,8 @@ function App() {
           addToCart={addToCart}
           user={user}
           setUser={setUser}
+          seller={seller}
+          setSeller={setSeller}
         />
         <Routes>
           <Route
@@ -158,12 +165,23 @@ function App() {
             path="/login"
             element={<Login user={user} setUser={setUser} />}
           ></Route>
+          <Route
+            exact
+            path="/sellerLogin"
+            element={<SellerLogin seller={seller} setSeller={setSeller} />}
+          ></Route>
           <Route exact path="/register" element={<Register />}></Route>
+          <Route
+            exact
+            path="/sellerRegister"
+            element={<SellerRegister />}
+          ></Route>
           <Route
             exact
             path="/"
             element={<Product addToCart={addToCart} data={data} />}
           ></Route>
+          <Route exact path="/order" element={<Order />}></Route>
           <Route
             exact
             path="/cart"

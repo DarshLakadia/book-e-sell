@@ -10,12 +10,12 @@
     /* background: linear-gradient(135deg,#c4deef,#866793); */
 }
 
-.product .product-container{
+.product .products-container{
     width: 90%;
     height: 90vh;
     padding-inline: 40px;
 }
-.product .product-container .title{
+.product .products-container .title{
     justify-content: center;
     display: flex;
     margin: 50px auto;
@@ -24,7 +24,7 @@
     color: #414141;
 }
 
-.product .product-container .product-details{
+.product .products-container .product-details{
     margin-inline: auto;
     width: 85%;
     display: flex;
@@ -32,11 +32,11 @@
     margin-bottom: 45px;
 
 }
-.product .product-container .product-details .name{
+.product .products-container .product-details .name{
     font: 18px Roboto;
     color: #414141;
 }
-.product .product-container .product-details .sort select{
+.product .products-container .product-details .sort select{
     margin-inline: 5px ;
     width: 200px;
     height: 40px;
@@ -112,13 +112,13 @@
     height: 117.2px;
 }
 
-.product .product-container .title{
+.product .products-container .title{
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.product-container a{
+.products-container a{
     text-decoration: none;
    margin-inline: 2px;
 }
@@ -140,4 +140,21 @@
 }
 .sort Button:hover{
     background-color: yellowgreen;
+}
+
+.sort button{
+  
+
+        position: inherit;
+        height: 30px;
+        margin-block: 5px !important;
+        background-color: #f14d54;
+        width: 100%;
+        padding: 30px auto !important;
+        margin: 2px auto;
+        border-radius: 5px;
+        border: none;
+        color: white  !important ;
+        cursor: pointer;
+    
 }

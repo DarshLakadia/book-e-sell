@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../style.css";
 import { toast } from "react-toastify";
-const Login = ({ user, setUser }) => {
+const SellerLogin = ({ seller, setSeller }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
   const postresponse = () => {
-    fetch("/user/login", {
+    fetch("/seller/sellerlogin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const Login = ({ user, setUser }) => {
     })
       .then((res) => res.json())
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         if (response.error) {
           console.log(response.error);
           toast.error(response.error, {
@@ -30,17 +30,17 @@ const Login = ({ user, setUser }) => {
           });
         } else {
           localStorage.setItem("jwt", response.token);
-          localStorage.setItem("user", JSON.stringify(response.user));
-          console.log(response.user);
-          localStorage.getItem("user") &&
-            toast.success("User Login Successfully", {
+          localStorage.setItem("seller", JSON.stringify(response.seller));
+          console.log(response.seller);
+          localStorage.getItem("seller") &&
+            toast.success("Seller Login Successfully", {
               position: "top-center",
               autoClose: 5000,
               hideProgressBar: true,
             });
           // history.push("/");
-          setUser(response.user);
-          navigate("/");
+          setSeller(response.seller);
+          navigate("/order");
         }
       })
       .catch((err) => {
@@ -51,7 +51,7 @@ const Login = ({ user, setUser }) => {
   return (
     <div className="register">
       <div className="register-container">
-        <div className="title">User Login</div>
+        <div className="title">Seller-Login</div>
         {/* <form > */}
         <div className="user-details">
           <div className="input-box">
@@ -87,4 +87,4 @@ const Login = ({ user, setUser }) => {
   );
 };
 
-export default Login;
+export default SellerLogin;

@@ -142,3 +142,37 @@ align-items: center; */
     color: #f14d54;
     cursor: pointer;
 }
+
+.seller-name{
+    width: 100px;
+    height: 30px;
+    background: #f14d54;
+    margin: 20px;
+    color: white;
+    text-align: center;
+    
+
+}
+
+.showSeller{
+    border-radius: 5px;
+    width: 250px;
+    position: absolute;
+    background-color: antiquewhite;
+    height: auto;
+    max-height: 400px;
+    overflow-y: scroll;
+    z-index: 1;
+    /* padding: 10px; */
+
+}
+.searchSeller{
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    /* flex-direction: column; */
+}
+.showSeller::-webkit-scrollbar{
+    display: none;
+}

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "../register.css";
-import M from "materialize-css";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Register = () => {
+const SellerRegister = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
   const postData = () => {
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -20,12 +21,11 @@ const Register = () => {
         autoClose: 5000,
         hideProgressBar: true,
       });
-
       return;
     }
     console.log(firstName, lastName, email, password);
 
-    fetch("/user/register", {
+    fetch("/seller/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -46,11 +46,12 @@ const Register = () => {
             hideProgressBar: true,
           });
         } else {
-          toast.error(data.message, {
+          toast.success(data.message, {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: true,
           });
+          navigate("/sellerLogin");
         }
       })
       .catch((err) => {
@@ -61,11 +62,11 @@ const Register = () => {
   return (
     <div className="register">
       <div className="register-container">
-        <div className="title">User Registration</div>
+        <div className="title">Seller-Registration</div>
         {/* <form action="#"> */}
         <div className="user-details">
           <div className="input-box">
-            <span className="details">FirstName</span>
+            <span className="details">City</span>
             <input
               type="text"
               placeholder="Enter FirstName"
@@ -75,7 +76,7 @@ const Register = () => {
             />
           </div>
           <div className="input-box">
-            <span className="details">LastName</span>
+            <span className="details">State</span>
             <input
               type="text"
               placeholder="Enter LastName"
@@ -114,4 +115,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SellerRegister;
