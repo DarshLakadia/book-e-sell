@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../../config/keys");
 
-<<<<<<< HEAD
 router.post("/address", (req, res) => {
   const { _id } = req.body;
   if (!_id) {
@@ -24,8 +23,6 @@ router.post("/address", (req, res) => {
   });
 });
 
-=======
->>>>>>> ee470689ed26b6c429b2fd78d0ed7fd783fc6a33
 router.post("/register", (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   //   console.log(firstName, lastName, email, password);
