@@ -4,7 +4,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const userRoutes = require("./api/routes/userRoutes");
 const bookRoutes = require("./api/routes/bookRoutes");
+<<<<<<< HEAD
 const sellerRoutes = require("./api/routes/sellerRoutes");
+=======
+>>>>>>> ee470689ed26b6c429b2fd78d0ed7fd783fc6a33
 const mongoose = require("mongoose");
 const { MONGO_URI, JWT_SECRET } = require("./config/keys");
 const app = express();
@@ -38,7 +41,11 @@ app.use((req, res, next) => {
 
 app.use("/user", userRoutes);
 app.use("/product", bookRoutes);
+<<<<<<< HEAD
 app.use("/seller", sellerRoutes);
+=======
+
+>>>>>>> ee470689ed26b6c429b2fd78d0ed7fd783fc6a33
 // app.use((req, res, next) => {
 //   const error = new Error("Not found");
 //   error.status = 404;
