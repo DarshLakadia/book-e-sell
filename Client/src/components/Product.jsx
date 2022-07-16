@@ -56,7 +56,7 @@ const Product = ({ data, addToCart }) => {
   // console.log(isSorted);
   useEffect(() => {
     setCurData(data);
-  }, []);
+  }, [data]);
   // console.log(curData);
   // console.log(data);
   return (

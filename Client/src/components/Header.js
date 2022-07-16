@@ -80,7 +80,7 @@ const Header = ({ data, addToCart, user, setUser, seller, setSeller }) => {
         </div>
       )}
 
-      {seller || user ? (
+      {seller.length != 0 || user.length != 0 ? (
         <div className="right">
           <span
             onClick={() => {
